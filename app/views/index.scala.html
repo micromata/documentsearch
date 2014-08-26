@@ -1,4 +1,8 @@
-@()(implicit request: play.api.mvc.Request[Any], lang: Lang)
+@(searchResult: models.SearchResult = null, query: String = "")(implicit request: play.api.mvc.Request[Any], lang: Lang)
+
+@import scala.collection.JavaConversions._
+@import global.Global
+
 <!DOCTYPE html>
 
 <html>
@@ -11,7 +15,38 @@
     <body>
         <div class="container">
             <h1>@Messages("title")</h1>
-            Hello world!
+            <form method="get" action="search">
+                <div class="row">
+                    <div class="col-md-11">
+                        <div class="form-group has-feedback">
+                            <label class="control-label">&nbsp;</label>
+                            <input type="text" class="form-control" name="query" id="searchField" value="@query">
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <label class="control-label">&nbsp;</label>
+                        <button class="btn btn-primary">@Messages("search")</button>
+                    </div>
+                </div>
+            </form>
+
+            @if(searchResult != null) {
+                @if(searchResult.hits.size > 0) {
+                    @searchResult.hits.map { searchHit =>
+                        <h2>@Global.documentFolder@searchHit.folder/@searchHit.file</h2>
+                    @searchHit.highlights.map { highlight =>
+                        <blockquote>
+                            <p>@Html(highlight)</p>
+                        </blockquote>
+                    }
+                    }
+                } else {
+                    <blockquote>
+                    @Messages("noResult")
+                    </blockquote>
+                }
+            }
         </div>
 
         <script src="@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))"></script>

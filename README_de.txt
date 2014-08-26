@@ -50,6 +50,9 @@ Implementierung ermöglicht das Absetzen von Suchanfragen. Hier wird mit Lucene-
 ## Schritt 5.1: Webjars
 Webjars Dependencies eingefügt und in ``index.scala.html`` und ``routes`` verfügbar gemacht.
 
+## Schritt 5.1: Restliche Oberfläche
+Notwendige Anpassungen für die Oberfäche in den Dateien ``index.scala.html``, ``main.css``, ``documentsearch.js``, ``Application.scala`` und ``routes``.
+
 
 # 4. Rückblick
 
