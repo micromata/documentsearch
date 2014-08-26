@@ -43,6 +43,10 @@ Konfigurierten Ordner rekursiv durchsuchen und für jedes Dokument einen prepare
 ## Schritt 4.3: CronActor
 ``CronActor``, welcher alle 5 Minuten ein ``index`` bzw. ``re-index`` anstößt.
 
+## Schritt 4.4: Suchanfragen
+``ElasticSearchSearchHelper.scala``
+Implementierung ermöglicht das Absetzen von Suchanfragen. Hier wird mit Lucene-Features gearbeitet, welche unter Anderem das Highlighting ermöglichen.
+
 
 # 4. Rückblick
 
