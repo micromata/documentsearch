@@ -1,7 +1,14 @@
-@(message: String)
+@()(implicit request: play.api.mvc.Request[Any], lang: Lang)
+<!DOCTYPE html>
 
-@main("Welcome to Play") {
-
-    @play20.welcome(message)
-
-}
+<html>
+    <head>
+        <title>@Messages("title")</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <script src="@routes.Assets.at("javascripts/documentsearch.js")" type="text/javascript"></script>
+    </head>
+    <body>
+        Hello world!
+    </body>
+</html>
