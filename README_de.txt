@@ -29,6 +29,11 @@ vs.
 
 Siehe: http://localhost:9200/_nodes?settings=true&pretty=true
 
+## Schritt 3: Suchindex anlegen in ElasticSearch
+Beim hochfahren muss der Suchindex mittels der Datei ``conf/createIndex.sh`` angelegt werden.
+
+Siehe: http://localhost:9200/documentsearch/_mapping?pretty=true
+
 
 # 4. Rückblick
 

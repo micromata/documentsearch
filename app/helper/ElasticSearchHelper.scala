@@ -5,6 +5,8 @@ import org.elasticsearch.common.settings.ImmutableSettings
 import org.elasticsearch.node.NodeBuilder._
 import org.elasticsearch.node.Node
 import org.elasticsearch.client.Client
+import java.io.File
+import org.apache.commons.io.FileUtils
 
 object ElasticSearchHelper {
 
@@ -20,9 +22,26 @@ object ElasticSearchHelper {
     .settings(elasticsearchSettings.build())
     .node()
 
+  val client: Client = node.client()
+
+  val index = "documentsearch"
+
+  val indexType = "document"
+
   def start() = {
     log.info("Starting ElasticSearch")
     node.start()
+    try {
+      log.info("delete/create search index")
+      val tmpFile = File.createTempFile("documentsearch", "sh")
+      FileUtils.copyInputStreamToFile(getClass.getClassLoader.getResourceAsStream("createIndex.sh"), tmpFile)
+      Runtime.getRuntime.exec("chmod u+x " + tmpFile.getAbsolutePath)
+      Runtime.getRuntime.exec(tmpFile.getAbsolutePath)
+      tmpFile.deleteOnExit()
+    } catch {
+      case o_O: Exception =>
+        log.warn("Unable to delete/create search index", o_O)
+    }
   }
 
   def stop() = {
