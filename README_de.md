@@ -1,5 +1,4 @@
 # 1. Einführung
-
 - Micromata macht Projekte im Kundenauftrag, meistens DAX-30-Unternehmen (DHL, VW, Wingas, Wintershall, BBraun, ...).
 - Wir haben oft größere Spezifikationsphasen in denen vielen Dokumente in unterschiedlichsten Formaten verfasst werden. Meistens geht es mit Confluence oder anderen modernen kollaborativen Tools los, dann muss aber noch ein CI oben drauf oder eine Vorlage verwendet werden und am Ende landet man doch bei Word, Excel, Powerpoint, PDF und Konsorten.
 - Diese Spezifikationen legen wir klassischerweise in einem Dokumentations-Repository in Git oder SVN ab.
@@ -7,16 +6,19 @@
 - Egal wie gut man strukturiert, organisiert, referenziert und verlinkt, ab einer bestimmten Größe ist das Auffinden von Informationen äußerst schwierig und zeitintensiv.
 - Daher hatten ein Kollege und ich die Idee, dass wir eine Suchmaschine in unseren bestehende Entwicklungsinfrastruktur integrieren und dabei möglichst sinnvolle Technologien einsetzen wollen um möglichst wenig Zeit für die Implementierung zu verwenden und maximal viel Spaß dabei haben ;-)
 
+
 # 2. Architektur
 - Für die Implementierung haben wir genommen, was wir kannten und konnten. So sind wir bei dem Playframework mit Scala, Elasticsearch und Git gelandet.
 - Dabei ist die Idee, dass wir eine Webanwendung bauen, welche auf dem lokalen Dateisystem arbeitet in welchem die Dokumente liegen und es einen CronActor gibt, welcher alle 5 Minunten ein ``git pull`` macht und danach ein ``reindex`` der Dokumente in Elasticsearch anstößt.
 - Jede Suchanfrage wird von der Webanwendung für den Elasticsearch-Server aufbereitet und das Ergebnis aufgehübscht angezeigt.
 - Elasticsearch kann dabei entweder ``embedded`` oder ``standalone`` gestartet werden.
 
+
 # 3. Implementierung
 ## Schritt 1: Ein neues Projekt
 ``activator new documentsearch``<br/>
 Wir machen ein neues play-scala-Projekt und löschen alle Dateien, die wir nicht aus dem Template brauchen und räumen die Konfigurationsdateien auf.
+
 
 ## Schritt 2: build.sbt
 Wir fügen die Abhängigkeiten zu ``elasticsearch``, ``commons-io`` hinzu. Weiterhin verwenden wir eine ``logger.xml`` und implementieren eine ``Global.scala`` um Elasticsearch zu starten und implementieren die Helper Objekte ``HashHelper.scala`` und ``ElasticSearchHelper.scala``.<br/>
@@ -50,12 +52,22 @@ Implementierung ermöglicht das Absetzen von Suchanfragen. Hier wird mit Lucene-
 ## Schritt 5.1: Webjars
 Webjars Dependencies eingefügt und in ``index.scala.html`` und ``routes`` verfügbar gemacht.
 
-## Schritt 5.1: Restliche Oberfläche
+## Schritt 5.2: Restliche Oberfläche
 Notwendige Anpassungen für die Oberfäche in den Dateien ``index.scala.html``, ``main.css``, ``documentsearch.js``, ``Application.scala`` und ``routes``.
 
 
 # 4. Rückblick
+- Wir haben eine simple Play-Anwendung gebaut, mit der wir lokale Dateiinhalte in ElasticSearch indizieren lassen um dann darauf zu suchen.
+- Dabei nutzen wir Features von ElasticSearch für Scoring und Highlighting um die Ergebnisse intelligent aufzubereiten.
+- Weiterhin nutzen wir Webjars (Bootstrap, Bootswatch, JQuery) um unsere Oberfläche aufzuhübschen.
+- Dabei haben wir knapp 300 Zeilen Scala-Code benötigt.
+- Limitationen einer Webanwendung -> Man kann die Dokumente nicht direkt öffnen
 
 
 # 5. Ausblick
+- Migration von lokaler Anwendung zu Server-Anwendung mit Mandantenfähigkeit und mehreren "Projekten"
+- Potentielle Ersetzung von Git/SVN durch eine Ablage der Dokumente direkt in ElasticSearch
+- Einbettung einer Suche über Revisionen eines Dokumentes hinweg
+- Integration von anderer Quellen, welche durchsucht werden sollen (inklusive Rollen- und Rechte-Konzept) -> Source Code (würde jetzt schon gehen), Confluence, Jira, Forum, Jenkins, Bamboo, ...
+- Zu dem letzten Thema betreut die Micromata aktuell eine Bachelorthesis
 
