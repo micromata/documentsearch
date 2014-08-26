@@ -34,6 +34,9 @@ Beim hochfahren muss der Suchindex mittels der Datei ``conf/createIndex.sh`` ang
 
 Siehe: http://localhost:9200/documentsearch/_mapping?pretty=true
 
+## Schritt 4.1: Erste Schritt in Richtung Synchronisierung
+Konfiguration der Anwendung und erste Implementierung der Synchronisierung zwischen Dateisystem und ElasticSearch.
+
 
 # 4. Rückblick
 
