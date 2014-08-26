@@ -18,6 +18,17 @@
 ``activator new documentsearch``<br/>
 Wir machen ein neues play-scala-Projekt und löschen alle Dateien, die wir nicht aus dem Template brauchen und räumen die Konfigurationsdateien auf.
 
+## Schritt 2: build.sbt
+Wir fügen die Abhängigkeiten zu ``elasticsearch``, ``commons-io`` hinzu. Weiterhin verwenden wir eine ``logger.xml`` und implementieren eine ``Global.scala`` um Elasticsearch zu starten und implementieren die Helper Objekte ``HashHelper.scala`` und ``ElasticSearchHelper.scala``.<br/>
+
+Das coole bei Elasticsearch plugins im ``embedded`` Modus: Die Jar-Datei muss nur im Classpath liegen damit das Plugin aktiviert ist.<br/>
+Wir verwenden folgendes Plugin: https://github.com/elasticsearch/elasticsearch-mapper-attachments <br/>
+``"org.elasticsearch" % "elasticsearch-mapper-attachments" % "2.3.1"``
+vs.
+``bin/plugin -install elasticsearch/elasticsearch-mapper-attachments/2.3.1``
+
+Siehe: http://localhost:9200/_nodes?settings=true&pretty=true
+
 
 # 4. Rückblick
 
