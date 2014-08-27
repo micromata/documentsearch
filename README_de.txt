@@ -40,6 +40,9 @@ Konfiguration der Anwendung und erste Implementierung der Synchronisierung zwisc
 ## Schritt 4.2: BulkIndex für alle Dokumente bauen
 Konfigurierten Ordner rekursiv durchsuchen und für jedes Dokument einen prepared Index erstellen und zu einem BulkIndex zusammenfassen. Anschließend den BulkIndex gesammelt an den Server senden.
 
+## Schritt 4.3: CronActor
+``CronActor``, welcher alle 5 Minuten ein ``index`` bzw. ``re-index`` anstößt.
+
 
 # 4. Rückblick
 
