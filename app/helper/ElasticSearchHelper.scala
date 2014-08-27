@@ -7,6 +7,8 @@ import org.elasticsearch.node.Node
 import org.elasticsearch.client.Client
 import java.io.File
 import org.apache.commons.io.FileUtils
+import org.elasticsearch.client.transport.TransportClient
+import org.elasticsearch.common.transport.InetSocketTransportAddress
 
 object ElasticSearchHelper {
 
@@ -23,6 +25,11 @@ object ElasticSearchHelper {
     .node()
 
   val client: Client = node.client()
+
+  // TODO use this client for remote ElasticSearch server
+  private val remoteClient: Client =
+    new TransportClient(ImmutableSettings.settingsBuilder().build())
+    .addTransportAddress(new InetSocketTransportAddress("localhost", 9300))
 
   val index = "documentsearch"
 
