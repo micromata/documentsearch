@@ -1,0 +1,8 @@
+blockquote em {
+  font-weight: bold;
+  color: #df691a;
+}
+
+.form-control-feedback {
+  cursor: pointer;
+}
