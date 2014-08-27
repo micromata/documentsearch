@@ -16,6 +16,8 @@ object ElasticSearchSyncHelper {
 
   private var syncing: Boolean = false
 
+  def isSyncing = syncing
+
   def sync(): Unit = {
     val command = Global.cronCommand
     if (StringUtils.isNotEmpty(command)) {
