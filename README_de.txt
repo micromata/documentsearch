@@ -37,6 +37,9 @@ Siehe: http://localhost:9200/documentsearch/_mapping?pretty=true
 ## Schritt 4.1: Erste Schritt in Richtung Synchronisierung
 Konfiguration der Anwendung und erste Implementierung der Synchronisierung zwischen Dateisystem und ElasticSearch.
 
+## Schritt 4.2: BulkIndex für alle Dokumente bauen
+Konfigurierten Ordner rekursiv durchsuchen und für jedes Dokument einen prepared Index erstellen und zu einem BulkIndex zusammenfassen. Anschließend den BulkIndex gesammelt an den Server senden.
+
 
 # 4. Rückblick
 
