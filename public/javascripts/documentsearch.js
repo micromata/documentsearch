@@ -1,3 +1,3 @@
-if (window.console) {
+$(function() {
   console.log("Hello world!");
-}
+});
