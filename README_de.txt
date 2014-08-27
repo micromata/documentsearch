@@ -47,6 +47,9 @@ Konfigurierten Ordner rekursiv durchsuchen und für jedes Dokument einen prepare
 ``ElasticSearchSearchHelper.scala``
 Implementierung ermöglicht das Absetzen von Suchanfragen. Hier wird mit Lucene-Features gearbeitet, welche unter Anderem das Highlighting ermöglichen.
 
+## Schritt 5.1: Webjars
+Webjars Dependencies eingefügt und in ``index.scala.html`` und ``routes`` verfügbar gemacht.
+
 
 # 4. Rückblick
 
